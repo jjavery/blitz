@@ -1,0 +1,33 @@
+{
+  "name": "@jjavery/blitz",
+  "version": "1.0.0",
+  "description": "Sets of dice representing attackers and defenders are rolled one or more times to determine casualties for each side",
+  "keywords": [
+    "blitz",
+    "dice"
+  ],
+  "main": "src/blitz.js",
+  "files": [
+    "src"
+  ],
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "docs": "jsdoc2md --template README.template.hbs.md --plugin @jjavery/dmd-jjavery --files src/*.js > README.md"
+  },
+  "author": "James P. Javery <james.javery@gmail.com> (https://github.com/jjavery)",
+  "license": "MIT",
+  "homepage": "https://github.com/jjavery/blitz#readme",
+  "bugs": "https://github.com/jjavery/blitz/issues",
+  "devDependencies": {
+    "@jjavery/dmd-jjavery": "^0.1.0",
+    "chai": "^4.3.0",
+    "jsdoc-to-markdown": "^6.0.1",
+    "mocha": "^8.3.0"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  }
+}
