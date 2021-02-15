@@ -1,0 +1,65 @@
+#!/usr/bin/env node
+
+const blitz = require('../src/blitz');
+
+if (process.argv.length <= 2) {
+  console.log('Missing attackers and/or defenders\n');
+  console.log('blitz <attackers> <defenders>');
+  process.exit(0);
+}
+
+const startingAttackersArg = +process.argv[2];
+const startingDefendersArg = +process.argv[3];
+
+const {
+  startingAttackers,
+  startingDefenders,
+  lostAttackers,
+  lostDefenders,
+  remainingAttackers,
+  remainingDefenders,
+  winner,
+  rounds
+} = blitz(startingAttackersArg, startingDefendersArg);
+
+console.log('Blitz!\n');
+
+let attackers = startingAttackers;
+let defenders = startingDefenders;
+
+for (const [index, round] of rounds.entries()) {
+  console.log(`Round ${index + 1}:`);
+  console.log(
+    `  Attacker rolls: ${round[0]}\n  Defender rolls: ${round[1]}`
+  );
+
+  const attackersLost = attackers - round[2];
+  const defendersLost = defenders - round[3];
+
+  if (attackersLost > 0) {
+    console.log(`  Attacker lost: ${attackersLost}`)
+  }
+
+  if (defendersLost > 0) {
+    console.log(`  Defender lost: ${defendersLost}`)
+  }
+
+  attackers = round[2];
+  defenders = round[3];
+}
+
+console.log(
+  `\n${
+    winner === 'attacker'
+      ? 'Attacker'
+      : winner === 'defender'
+      ? 'Defender'
+      : 'Nobody'
+  } won.\n`
+);
+console.log(
+  `Attacker started with ${startingAttackers}, lost ${lostAttackers}, and has ${remainingAttackers} remaining.`
+);
+console.log(
+  `Defender started with ${startingDefenders}, lost ${lostDefenders}, and has ${remainingDefenders} remaining.`
+);
